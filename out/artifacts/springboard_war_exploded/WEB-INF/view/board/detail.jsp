@@ -12,7 +12,6 @@
         <a href="/board/mod?iboard=${requestScope.data.iboard}"><button>수정</button></a>
         <button id="btnDel">삭제</button>
     </div>
-    <div>${requestScope.msg}</div>
     <div>번호 : <c:out value="${requestScope.data.iboard}"/> </div>
     <div>제목 : <c:out value="${requestScope.data.title}"/> </div>
     <div>내용 : <c:out value="${requestScope.data.ctnt}"/> </div>

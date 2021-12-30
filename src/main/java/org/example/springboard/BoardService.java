@@ -29,7 +29,11 @@ public class BoardService {
         updBoard(entity);
     }
 
-    public int delBoard(BoardEntity entity) {return mapper.delBoard(entity);}
+    public int delBoard(BoardEntity entity) {
+        try{ return mapper.delBoard(entity);}
+        catch (Exception e){e.printStackTrace();}
+        return 0;
+    }
 
     public int updBoard(BoardEntity entity){ return mapper.updBoard(entity);}
 }
