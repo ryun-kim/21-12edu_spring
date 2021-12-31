@@ -55,4 +55,22 @@ public class UserController {
         }
         return "redirect:" + referer;
     }
+
+    @GetMapping("/join")
+    public void join(){}
+
+    @PostMapping("/join")
+    public String joinPorc(UserEntity entity, RedirectAttributes reAttr){
+        int result = service.join(entity);
+        switch (result){
+            case 1:
+                int loginResult = service.login(entity);
+                if(loginResult ==1){
+                    return "redirect:/board/list";
+                }
+                return "redirect:/user/login";
+        }
+        reAttr.addFlashAttribute("msg", "회원가입에 실패하였습니다.");
+        return "redirect:/user/join";
+    }
 }

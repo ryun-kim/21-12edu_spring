@@ -6,4 +6,11 @@
         SELECT * FROM t_user
         WHERE uid = #{uid}
     </select>
+
+    <insert id="insUser">
+        INSERT INTO t_user
+        (uid , upw , nm, gender)
+        VALUES
+        (#{uid}, #{upw}, #{nm}, #{gender})
+    </insert>
 </mapper>

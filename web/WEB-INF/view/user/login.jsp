@@ -9,9 +9,6 @@
 </head>
 <body>
     <h1>로그인</h1>
-    <c:if test="">
-
-    </c:if>
 
     <div>
         <form action="/user/login" method="post">
