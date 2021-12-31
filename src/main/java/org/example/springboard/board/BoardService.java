@@ -1,5 +1,8 @@
-package org.example.springboard;
+package org.example.springboard.board;
 
+import org.example.springboard.UserUtils;
+import org.example.springboard.board.model.BoardEntity;
+import org.example.springboard.board.model.BoardVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,21 +13,31 @@ public class BoardService {
     @Autowired
     private BoardMapper mapper;
 
+    @Autowired
+    private UserUtils userUtils;
+
     public int insBoard(BoardEntity entity){
-        return mapper.insBoard(entity);
+        int result = 0;
+        try{
+            entity.setWriter(userUtils.getLoginuserPk());
+            result = mapper.insBoard(entity);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
-    public List<BoardEntity> selBoardList(){
+    public List<BoardVO> selBoardList(){
         return mapper.selBoardList();
     }
 
-    public BoardEntity selBoard(BoardEntity entity){
+    public BoardVO selBoard(BoardEntity entity){
         return mapper.selBoard(entity);
     }
 
     //조회수 올리기
     public void updBoardHitsUp(BoardEntity entity){
-        entity.setHits(1);
+        entity.setHit(1);
         //mapper.updBoard(entity);
         updBoard(entity);
     }
