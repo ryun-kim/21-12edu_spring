@@ -1,5 +1,6 @@
 package org.example.springboard.board;
 
+import org.example.springboard.UserUtils;
 import org.example.springboard.board.model.BoardEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +16,17 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
+    @Autowired
+    private UserUtils userUtils;
+
     @GetMapping("/write")
     public void write(){}
 
     @PostMapping("/write")
     public String writeProc(BoardEntity entity, RedirectAttributes reAttr){
-        System.out.println(entity);
         int result = service.insBoard(entity);
         if(result ==0){
+            //RedirectAttributes는 redirect와 관련되어 있다.
             //reAttr.addAttribute("msg","글 등록에 실패하였습니다."); 쿼리스트링으로 날린다
             reAttr.addFlashAttribute("msg","글 등록에 실패하였습니다."); //request로 날린다
             reAttr.addFlashAttribute("data",entity);
